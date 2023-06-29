@@ -1,35 +1,42 @@
 <script lang="ts">
-	import type { DropdownItem, DropdownItemsList } from './Dropdown.types';
+	import { onMount } from 'svelte';
 
-	export let itemsList: DropdownItemsList = [];
+	export let titleText: string | undefined = undefined;
+	export let size: 'sm' | 'md' | 'lg' = 'md';
+
 	let dropdownOpen = false;
+	let dropdownListRef: HTMLDivElement;
 
-	function handleItemClick(item: DropdownItem) {
-		item.onClick(item);
-	}
-
-	function handleButtonClick() {
+	function handleButtonClick(event: MouseEvent) {
+		event.preventDefault();
 		dropdownOpen = !dropdownOpen;
 	}
+
+	function handleClickOutside(event: MouseEvent) {
+		if (!dropdownOpen) return;
+		if (
+			dropdownListRef &&
+			!dropdownListRef.contains(event.target as Node) &&
+			!event.defaultPrevented
+		) {
+			dropdownOpen = false;
+		}
+	}
+
+	onMount(() => {
+		document.addEventListener('click', handleClickOutside);
+	});
 </script>
 
-<div class="dropdown">
-	<button on:click={handleButtonClick}><slot /></button>
+<div class="dropdown" data-size={size}>
+	<button data-size={size} on:click={handleButtonClick}>
+		{#if !titleText}
+			<slot name="menu" />
+		{/if}
+	</button>
 	{#if dropdownOpen}
-		<div class="dropdown_list">
-			<ul>
-				{#each itemsList as item}
-					<li>
-						<button
-							on:click={() => {
-								handleItemClick(item);
-							}}
-						>
-							<span>{item.text}</span>
-						</button>
-					</li>
-				{/each}
-			</ul>
+		<div class="dropdown_list" bind:this={dropdownListRef}>
+			<slot />
 		</div>
 	{/if}
 </div>
@@ -37,6 +44,21 @@
 <style lang="scss">
 	.dropdown {
 		position: relative;
+		aspect-ratio: 1/1;
+
+		button[data-size='sm'] {
+			height: 1.5rem;
+		}
+		button[data-size='md'] {
+			height: 2.5rem;
+		}
+		button[data-size='lg'] {
+			height: 3.5rem;
+		}
+		button {
+			aspect-ratio: 1/1;
+			width: 100%;
+		}
 	}
 
 	.dropdown_list {
@@ -45,23 +67,5 @@
 		min-width: 250px;
 		background-color: #606060;
 		padding: 1rem 0.5rem;
-		ul {
-			list-style-type: none;
-			margin: 0px;
-			padding: 0px;
-			display: flex;
-			flex-direction: column;
-			gap: 0.5rem;
-			
-			li {
-				width: 100%;
-				margin: 0px;
-				background-color: red;
-
-				button {
-					width: 100%;
-				}
-			}
-		}
 	}
 </style>

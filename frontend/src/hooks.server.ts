@@ -2,7 +2,6 @@ import { pb } from '$lib/pocketbase'
 import type { Record } from 'pocketbase'
 
 export async function handle({ event, resolve }) {
-    console.log("::USER: ", event.locals.user)
     const lang = event.cookies.get('lang') ?? 'ru'
     event.locals.lang = lang
 
@@ -14,7 +13,6 @@ export async function handle({ event, resolve }) {
 
     try {
         if (event.locals.pb.authStore.isValid) {
-            console.log('Success auth')
             await event.locals.pb.collection('users').authRefresh(undefined, {
                 $autoCancel: false
             })

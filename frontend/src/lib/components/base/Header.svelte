@@ -4,6 +4,7 @@
 	import TranslatePlanet from '$lib/icons/TranslatePlanet.svelte';
 	import { user } from '$lib/stores/user';
 	import Dropdown from '$lib/components/dropdown/Dropdown.svelte';
+	import HeaderUserSlotOverflow from './HeaderUserSlotOverflow.svelte';
 
 	function changeLocale() {
 		$locale = $locale === 'ru' ? 'en' : 'ru';
@@ -15,34 +16,12 @@
 		<span>{PUBLIC_APP_NAME}</span>
 	</div>
 	<div class="header_actions">
-		<button on:click={changeLocale}>
-			<TranslatePlanet height="24px" width="24px" />
-		</button>
+		{#if $user}
+			<HeaderUserSlotOverflow />
+		{:else}
+			<a href="/login">Login</a>
+		{/if}
 	</div>
-	{#if $user}
-		<Dropdown
-			itemsList={[
-				{
-					text: 'Hello world',
-					onClick: () => {}
-				},
-				{
-					text: 'Hello world',
-					onClick: () => {}
-				},
-				{
-					text: 'Hello world',
-					onClick: () => {}
-				},
-				{
-					text: 'Hello world',
-					onClick: () => {}
-				}
-			]}
-		> Hello world</Dropdown>
-	{:else}
-		<a href="/login">Login</a>
-	{/if}
 </header>
 
 <style lang="scss">
@@ -50,16 +29,19 @@
 		box-sizing: border-box;
 		height: 3rem;
 		display: flex;
-		background-color: #f5f5f5;
+		background-color: var(--primary-ui-01);
 		align-items: center;
-		padding: 0.5rem;
 	}
 
 	.app_logo {
 		user-select: none;
+		color: var(--text-01);
+		margin-left: 0.5rem;
+		letter-spacing: 0.125rem;
 	}
 
 	.header_actions {
+		height: 100%;
 		margin-left: auto;
 	}
 </style>
