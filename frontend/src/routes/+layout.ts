@@ -11,7 +11,5 @@ export const load = (async ({ url, data }) => {
 
     await loadTranslations(initLocale, pathname);
 
-    console.log('::LAYOUT USER: ', user)
-
     return { user };
 }) satisfies LayoutLoad;

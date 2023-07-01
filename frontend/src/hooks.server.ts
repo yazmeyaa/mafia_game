@@ -10,7 +10,6 @@ export async function handle({ event, resolve }) {
     event.locals.pb = pb
     event.locals.pb.authStore.loadFromCookie(tokenSerialized)
 
-
     try {
         if (event.locals.pb.authStore.isValid) {
             await event.locals.pb.collection('users').authRefresh(undefined, {
