@@ -1,8 +1,13 @@
 body {
-    height: 100vh;
-    margin: 0px;
+	height: 100vh;
+	margin: 0px;
 }
 
 html {
-    font-family: 'IBM Plex Sans';
+	font-family: 'IBM Plex Sans';
+}
+
+html,
+body {
+	@apply h-full overflow-hidden;
 }

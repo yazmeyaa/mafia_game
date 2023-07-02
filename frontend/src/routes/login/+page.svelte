@@ -2,8 +2,14 @@
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import { t } from '$lib/i18n';
 	import { enhance, applyAction } from '$app/forms';
+	import { onMount } from 'svelte';
 
-	let loading = false
+	let usernameRef: HTMLInputElement;
+	let loading = false;
+
+	onMount(() => {
+		usernameRef.focus();
+	});
 </script>
 
 <section class="login_page_container">
@@ -11,28 +17,39 @@
 		<figure class="logo">
 			<strong>{PUBLIC_APP_NAME}</strong>
 		</figure>
-		<h1>Login</h1>
+		<h1 class="h1">Login</h1>
 		<form
-			class="form"
+		class="flex flex-col gap-2"
 			method="post"
 			use:enhance={() => {
-				loading = true
+				loading = true;
 				return async ({ result }) => {
-					loading = false
+					loading = false;
 					applyAction(result);
 				};
 			}}
 		>
 			<div class="form_field column">
-				<label for="username">{$t('login.username')}</label>
-				<input name="username" autocomplete="off" id="username" />
+				<label class="label" for="username">
+					<span>{$t('login.username')}</span>
+					<input
+						type="text"
+						bind:this={usernameRef}
+						class="input"
+						name="username"
+						autocomplete="off"
+						id="username"
+					/>
+				</label>
 			</div>
 
 			<div class="form_field column">
-				<label for="password">{$t('login.password')}</label>
-				<input type="password" name="password" id="password" />
+				<label for="password">
+					<span class="label">{$t('login.password')}</span>
+					<input class="input" type="password" name="password" id="password" />
+				</label>
 			</div>
-			<button disabled={loading} type="submit">{$t('login.login')}</button>
+			<button class="btn variant-filled" disabled={loading} type="submit">{$t('login.login')}</button>
 			<small>{$t('login.dont_have_account')} <a href="/register">{$t('login.register')}</a></small>
 		</form>
 	</div>
@@ -60,18 +77,12 @@
 		flex-shrink: 1;
 		flex-grow: 1;
 		& > h1 {
-            text-align: center;
-        }
+			text-align: center;
+		}
 	}
 
 	.logo {
 		display: flex;
 		justify-content: center;
-	}
-
-	.form {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
 	}
 </style>

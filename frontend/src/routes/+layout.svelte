@@ -1,10 +1,9 @@
 <script lang="ts">
-	import '../app.postcss';
-	import '$lib/scss/main.scss';
 	import { user } from '$lib/stores/user.js';
-	import '@skeletonlabs/skeleton/themes/theme-crimson.css';
+	import 'remixicon/fonts/remixicon.css'
+	
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
-
+	import '@skeletonlabs/skeleton/themes/theme-crimson.css';
 	import '../app.postcss';
 
 	export let data;

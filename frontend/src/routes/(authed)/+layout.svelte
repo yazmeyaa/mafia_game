@@ -1,22 +1,70 @@
 <script lang="ts">
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+	import { PUBLIC_POCKETBASE_URL } from '$env/static/public';
+	import { user } from '$lib/stores/user';
+	import { AppShell, AppBar, Avatar } from '@skeletonlabs/skeleton';
+	import { LightSwitch } from '@skeletonlabs/skeleton';
+
+	const avatarUrl = `${PUBLIC_POCKETBASE_URL}/api/files/users/${$user?.id}/${$user?.avatar}?thumb=64x64`;
 </script>
 
 <AppShell>
-	<svelte:fragment slot="header">
-		<AppBar>
-			<h1 class="h1">
-				<span class="bg-gradient-to-br from-red-500 to-yellow-500 bg-clip-text text-transparent box-decoration-clone">Mafia</span>
-			</h1>
+	<svelte:fragment slot="pageHeader">
+		<AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
+			<svelte:fragment slot="lead">(icon)</svelte:fragment>
+			<a
+				href="/"
+				class=" h1 bg-gradient-to-br from-red-500 to-yellow-500 bg-clip-text text-transparent box-decoration-clone"
+				>Mafia</a
+			>
+			<svelte:fragment slot="trail">
+				<div class="flex gap-2 items-center relative">
+					<LightSwitch />
+					<div class="dropdown relative">
+						<a href="/profile" class="btn-icon variant-filled-primary"
+							><Avatar class="select-none" src={avatarUrl} />
+						</a>
+					</div>
+				</div>
+			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
-	<!-- <svelte:fragment slot="sidebarLeft"><div id="sidebar-left" class="hidden lg:block">Sidebar</div></svelte:fragment
-	> -->
-	<!-- (sidebarRight) -->
-	<!-- (pageHeader) -->
-	<!-- Router Slot -->
+
 	<slot />
-	<!-- ---- / ---- -->
 	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
-	<!-- (footer) -->
+	<svelte:fragment slot="sidebarLeft">
+		<div class=" h-full">
+			<nav class="">
+				<ul class="list-nav">
+					<span class="block w-full mx-auto text-center h5 my-2 select-none">Navigation</span>
+					<li>
+						<a href="/">
+							<i class="ri-home-line" />
+							<span>Main page</span>
+						</a>
+					</li>
+					<hr class="!border-t-4 my-2" />
+					<span class="block w-full mx-auto text-center h5 my-2 select-none">Game</span>
+					<li>
+						<a href="/create">
+							<i class="ri-add-circle-line" />
+							<span>Create game</span>
+						</a>
+					</li>
+					<li>
+						<a href="/join_game">
+							<i class="ri-arrow-right-line" />
+							<span>Join game</span>
+						</a>
+					</li>
+					<li>
+						<a href="/lobby_list">
+							<i class="ri-file-list-line" />
+							<span>Lobby list</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<a class="anchor" href="/logout">Logout</a>
+		</div>
+	</svelte:fragment>
 </AppShell>
