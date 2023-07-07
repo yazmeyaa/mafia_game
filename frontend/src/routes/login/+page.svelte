@@ -50,7 +50,7 @@
 				</label>
 			</div>
 			<button class="btn variant-filled" disabled={loading} type="submit">{$t('login.login')}</button>
-			<small>{$t('login.dont_have_account')} <a href="/register">{$t('login.register')}</a></small>
+			<small>{$t('login.dont_have_account')} <a class="anchor" href="/register">{$t('login.register')}</a></small>
 		</form>
 	</div>
 </section>

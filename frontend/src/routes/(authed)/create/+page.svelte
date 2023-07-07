@@ -1,12 +1,18 @@
 <script lang="ts">
 	let maxPlayer = 6;
 
-    $: console.log(maxPlayer)
+	$: console.log(maxPlayer);
 </script>
 
 <svlete:head>
 	<title>Mafia - Create game</title>
 </svlete:head>
+
+{#if maxPlayer >= 10}
+	<span>Max players is more or equal 10</span>
+{:else}
+	<span>Max player lower then 10</span>
+{/if}
 
 <main>
 	<div class="card max-w-4xl mx-auto mt-4 px-12">
@@ -42,15 +48,9 @@
 				<div>
 					<label class="label flex flex-col" for="max_players">
 						<span>Max players</span>
-						<input
-							type="number"
-							bind:value={maxPlayer}
-							class={`input`}
-							max="24"
-							min="0"
-						/>
+						<input type="number" bind:value={maxPlayer} class={`input`} max="24" min="0" />
 					</label>
-                    <small class="pl-2" >max: 24</small>
+					<small class="pl-2">max: 24</small>
 				</div>
 
 				<button class="btn variant-filled" type="submit">Create</button>

@@ -32,8 +32,8 @@
 	<slot />
 	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
 	<svelte:fragment slot="sidebarLeft">
-		<div class=" h-full">
-			<nav class="">
+		<div>
+			<nav>
 				<ul class="list-nav">
 					<span class="block w-full mx-auto text-center h5 my-2 select-none">Navigation</span>
 					<li>
