@@ -3,7 +3,7 @@ const requiredKeys = ['host', 'port', 'password', 'database'] as const
 
 type RequiredFieldsType = typeof requiredKeys[number]
 
-export type RedisConfigType = Record<RequiredFieldsType, string | number>
+export type RedisConfigType = Record<RequiredFieldsType, string>
 
 
 /**

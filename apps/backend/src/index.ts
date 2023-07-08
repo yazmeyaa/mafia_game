@@ -5,8 +5,8 @@ import * as WebSocket from 'ws'
 import { wsLobbyHandler } from 'handlers/WSLobbyHandler'
 import { createClient } from 'redis'
 import { appConfig, loadServerVariables } from 'config'
-
-const redis = createClient()
+import { Sequelize } from 'sequelize'
+import chalk from 'chalk'
 
 const socketPathes = {
     lobby: '/lobby',
@@ -25,13 +25,37 @@ async function loadServerConfig() {
 
 async function startServer() {
     await loadServerConfig()
+    console.log(chalk.bgBlue('System variables loaded.'))
+
     await redis.connect()
+    console.log(chalk.blue('Successfully connected to Redis.'))
+
+    await sequelize.authenticate()
+    console.log(chalk.blue('Connected to MySQL Database.'))
+
     server.listen(appConfig.server.port, () => {
-        console.log('Server started at port: ', appConfig.server.port)
+        console.log(chalk.blue('Server started at port: ', appConfig.server.port))
     })
 }
 
 startServer()
+
+const redis = createClient({
+    socket: {
+        host: appConfig.redis.host,
+        port: Number.parseInt(appConfig.redis.port),
+    },
+    database: Number.parseInt(appConfig.redis.database)
+})
+const sequelize = new Sequelize({
+    dialect: 'mysql',
+    host: appConfig.mysql.url,
+    port: Number.parseInt(appConfig.mysql.port),
+    username: appConfig.mysql.user,
+    password: appConfig.mysql.password,
+
+    logging: console.log
+})
 
 wss.on('connection', async (ws: WebSocket, req: http.IncomingMessage) => {
 

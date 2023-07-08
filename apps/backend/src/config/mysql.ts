@@ -3,7 +3,7 @@ const requiredKeys = ['port', 'url', 'user', 'password', 'database'] as const
 
 type RequiredFieldsType = typeof requiredKeys[number]
 
-export type MySQLConfigType = Record<RequiredFieldsType, string | number>
+export type MySQLConfigType = Record<RequiredFieldsType, string>
 
 
 /**
