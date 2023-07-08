@@ -1,18 +1,11 @@
 <script lang="ts">
 	let maxPlayer = 6;
 
-	$: console.log(maxPlayer);
 </script>
 
 <svlete:head>
 	<title>Mafia - Create game</title>
 </svlete:head>
-
-{#if maxPlayer >= 10}
-	<span>Max players is more or equal 10</span>
-{:else}
-	<span>Max player lower then 10</span>
-{/if}
 
 <main>
 	<div class="card max-w-4xl mx-auto mt-4 px-12">
