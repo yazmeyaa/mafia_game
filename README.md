@@ -30,6 +30,8 @@
         <div>
             <h4>apps/backend</h4>
             <pre>
+EXPRESS_PORT=NUMBER (REQUIRED)
+<br>
 MYSQL_PORT=NUMBER (REQUIRED)
 MYSQL_URL=string (REQUIRED)
 MYSQL_USER=string (REQUIRED)

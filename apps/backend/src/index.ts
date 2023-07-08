@@ -4,9 +4,9 @@ import * as http from 'http'
 import * as WebSocket from 'ws'
 import { wsLobbyHandler } from 'handlers/WSLobbyHandler'
 import { createClient } from 'redis'
+import { appConfig, loadServerVariables } from 'config'
 
 const redis = createClient()
-
 
 const socketPathes = {
     lobby: '/lobby',
@@ -17,16 +17,6 @@ const socketPathes = {
 const app = express()
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ server });
-
-const appConfig = {
-    server: {
-        port: 3000
-    }
-}
-
-function loadServerVariables() {
-    appConfig.server.port = Number(process.env.PORT) ?? appConfig.server.port
-}
 
 async function loadServerConfig() {
     dotenv.config()
