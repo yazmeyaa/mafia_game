@@ -1,0 +1,23 @@
+{
+  "name": "mafia-core",
+  "version": "0.0.1",
+  "description": "",
+  "private": false,
+  "scripts": {
+    "dev": "turbo run dev --parallel"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "turbo": "^1.10.7"
+  },
+  "packageManager": "pnpm@7.22.0",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

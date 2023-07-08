@@ -1,0 +1,11 @@
+{
+  "name": "pb_database",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pocketbase.exe serve"
+  },
+  "author": "",
+  "license": "ISC"
+}
