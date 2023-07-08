@@ -1,12 +1,12 @@
+import './paths'
 import express from 'express'
-import dotenv from 'dotenv'
 import * as http from 'http'
 import * as WebSocket from 'ws'
 import { wsLobbyHandler } from 'handlers/WSLobbyHandler'
-import { createClient } from 'redis'
-import { appConfig, loadServerVariables } from 'config'
-import { Sequelize } from 'sequelize'
+import { appConfig } from 'config'
 import chalk from 'chalk'
+import { sequelize } from './modules/sequelize'
+import { redis } from './modules/redis'
 
 const socketPathes = {
     lobby: '/lobby',
@@ -18,13 +18,7 @@ const app = express()
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ server });
 
-async function loadServerConfig() {
-    dotenv.config()
-    loadServerVariables()
-}
-
 async function startServer() {
-    await loadServerConfig()
     console.log(chalk.bgBlue('System variables loaded.'))
 
     await redis.connect()
@@ -33,29 +27,15 @@ async function startServer() {
     await sequelize.authenticate()
     console.log(chalk.blue('Connected to MySQL Database.'))
 
+    await sequelize.sync()
+    console.log(chalk.blue("Successfull synced Sequelize with MySQL server."))
+
     server.listen(appConfig.server.port, () => {
         console.log(chalk.blue('Server started at port: ', appConfig.server.port))
     })
 }
 
 startServer()
-
-const redis = createClient({
-    socket: {
-        host: appConfig.redis.host,
-        port: Number.parseInt(appConfig.redis.port),
-    },
-    database: Number.parseInt(appConfig.redis.database)
-})
-const sequelize = new Sequelize({
-    dialect: 'mysql',
-    host: appConfig.mysql.url,
-    port: Number.parseInt(appConfig.mysql.port),
-    username: appConfig.mysql.user,
-    password: appConfig.mysql.password,
-
-    logging: console.log
-})
 
 wss.on('connection', async (ws: WebSocket, req: http.IncomingMessage) => {
 

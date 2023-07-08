@@ -1,16 +1,22 @@
-import { BaseModel } from "models"
+import { sequelize } from '@modules/sequelize'
+import { DataTypes } from 'sequelize'
 
-interface User extends BaseModel {
-    username: string
-    stats: UserStats
-    name: string | null
-    avaratUrl: string | null
-}
 
-interface UserStats {
-    games: number
-    wins: number
-    loses: number
-}
-
-export type { User, UserStats }
+export const Users = sequelize.define('Users', {
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    avatar: {
+        type: DataTypes.STRING,
+    },
+    email: {
+        type: DataTypes.STRING,
+        unique: true,
+    },
+})
