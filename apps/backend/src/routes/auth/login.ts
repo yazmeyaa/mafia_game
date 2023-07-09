@@ -9,6 +9,10 @@ interface RequestBody {
     password: string,
 }
 
+const wrongAuthResponse = {
+    error: "Username or password wrong"
+}
+
 async function login(req: Request<any, any, RequestBody>, res: Response) {
     const { password, username } = req.body
     if (!username || username.trim().length === 0) return res.status(400).json({
@@ -17,10 +21,6 @@ async function login(req: Request<any, any, RequestBody>, res: Response) {
     if (!password || password.trim().length === 0) return res.status(400).json({
         error: "Missing password field"
     })
-
-    const wrongAuthResponse = {
-        error: "Username or password wrong"
-    }
 
     const user = await Users.findOne({ where: { username } })
 

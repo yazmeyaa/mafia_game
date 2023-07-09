@@ -145,6 +145,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.14
         version: 10.4.14(postcss@8.4.25)
+      backend_service:
+        specifier: workspace:*
+        version: link:../../packages/backend_service
       eslint:
         specifier: ^8.44.0
         version: 8.44.0
@@ -199,6 +202,8 @@ importers:
       eslint:
         specifier: ^8.44.0
         version: 8.44.0
+
+  packages/shared_types: {}
 
 packages:
 

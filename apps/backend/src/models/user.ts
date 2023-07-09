@@ -1,5 +1,5 @@
 import { sequelize } from '@modules/sequelize'
-import { DataTypes, Model, Optional } from 'sequelize'
+import { DataTypes, Model } from 'sequelize'
 
 interface UserAttributes {
     username: string;
