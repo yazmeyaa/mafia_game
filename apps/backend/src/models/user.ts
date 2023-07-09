@@ -1,8 +1,16 @@
 import { sequelize } from '@modules/sequelize'
-import { DataTypes } from 'sequelize'
+import { DataTypes, Model, Optional } from 'sequelize'
 
+interface UserAttributes {
+    username: string;
+    password: string;
+    avatar?: string;
+    email?: string;
+}
 
-export const Users = sequelize.define('Users', {
+export interface UserInstance extends Model<UserAttributes, UserAttributes>, UserAttributes { }
+
+export const Users = sequelize.define<UserInstance>('Users', {
     username: {
         type: DataTypes.STRING,
         allowNull: false,

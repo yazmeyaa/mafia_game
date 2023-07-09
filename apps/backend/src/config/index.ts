@@ -13,6 +13,7 @@ interface AppConfig {
     },
     mysql: MySQLConfigType
     redis: RedisConfigType
+    jwtSecret: string
 }
 
 /** Setup server variables in ```appConfig``` */
@@ -23,6 +24,9 @@ export function loadServerVariables() {
     appConfig.server.port = Number(process.env.EXPRESS_PORT) ?? 3000
     appConfig.mysql = getMySQLConfig()
     appConfig.redis = getRedisConfig()
+    const JWTSecret = process.env.JWT_SECRET
+    if (!JWTSecret) throw new Error('JWT Secret string is not provided (JWT_SECRET=...')
+    appConfig.jwtSecret = JWTSecret
 }
 export const appConfig: AppConfig = { //* Here can be used default settings
 } as AppConfig

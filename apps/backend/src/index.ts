@@ -7,6 +7,9 @@ import { appConfig } from 'config'
 import chalk from 'chalk'
 import { sequelize } from './modules/sequelize'
 import { redis } from './modules/redis'
+import cors from 'cors'
+import cookieParser from 'cookie-parser'
+import { authRouter } from './routes/auth'
 
 const socketPathes = {
     lobby: '/lobby',
@@ -36,6 +39,19 @@ async function startServer() {
 }
 
 startServer()
+
+const corsOptions = {
+    origin: ['http://localhost:3001', 'http://localhost:3000'],
+    credentials: true
+}
+
+app.use(cors(corsOptions));
+
+app.use(cookieParser())
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+
+app.use('/auth/', authRouter)
 
 wss.on('connection', async (ws: WebSocket, req: http.IncomingMessage) => {
 
