@@ -32,15 +32,13 @@ async function login(req: Request<any, any, RequestBody>, res: Response) {
 
     const token = sign({ username: user.username }, appConfig.jwtSecret)
 
-    res.cookie('auth', token, {
-        httpOnly: true
-    })
-
-    return res.status(200).json({
-        user,
+    const responsePayload = {
+        user: user,
+        token,
         message: "Successfull authenticated",
-        meta: "JWT in headers"
-    })
+    }
+
+    return res.status(200).json(responsePayload)
 
 }
 
