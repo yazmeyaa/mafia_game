@@ -1,3 +1,29 @@
+## v0.16.8
+
+- Fixed unique validator detailed error message not being returned when camelCase field name is used ([#2868](https://github.com/pocketbase/pocketbase/issues/2868)).
+
+- Updated the index parser to allow no space between the table name and the columns list ([#2864](https://github.com/pocketbase/pocketbase/discussions/2864#discussioncomment-6373736)).
+
+- Updated go deps.
+
+
+## v0.16.7
+
+- Minor optimization for the list/search queries to use `rowid` with the `COUNT` statement when available.
+  _This eliminates the temp B-TREE step when executing the query and for large datasets (eg. 150k) it could have 10x improvement (from ~580ms to ~60ms)._
+
+
+## v0.16.6
+
+- Fixed collection index column sort normalization in the Admin UI ([#2681](https://github.com/pocketbase/pocketbase/pull/2681); thanks @SimonLoir).
+
+- Removed unnecessary admins count in `apis.RequireAdminAuthOnlyIfAny()` middleware ([#2726](https://github.com/pocketbase/pocketbase/pull/2726); thanks @svekko).
+
+- Fixed `multipart/form-data` request bind not populating map array values ([#2763](https://github.com/pocketbase/pocketbase/discussions/2763#discussioncomment-6278902)).
+
+- Upgraded npm and Go dependencies.
+
+
 ## v0.16.5
 
 - Fixed the Admin UI serialization of implicit relation display fields ([#2675](https://github.com/pocketbase/pocketbase/issues/2675)).

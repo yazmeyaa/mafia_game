@@ -203,8 +203,6 @@ importers:
         specifier: ^8.44.0
         version: 8.44.0
 
-  packages/shared_types: {}
-
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:

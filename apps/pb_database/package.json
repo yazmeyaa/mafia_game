@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "pocketbase.exe serve"
+    "dev": "./pocketbase serve"
   },
   "author": "",
   "license": "ISC"

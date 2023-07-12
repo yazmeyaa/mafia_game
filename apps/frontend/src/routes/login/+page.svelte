@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import { t } from '$lib/i18n';
 	import { enhance, applyAction } from '$app/forms';
 	import { onMount } from 'svelte';
@@ -15,7 +14,7 @@
 <section class="login_page_container">
 	<div class="form_container">
 		<figure class="logo">
-			<strong>{PUBLIC_APP_NAME}</strong>
+			<strong>Mafia</strong>
 		</figure>
 		<h1 class="h1">Login</h1>
 		<form
