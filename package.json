@@ -10,7 +10,13 @@
     "apps/*",
     "packages/*"
   ],
-  "keywords": [],
+  "keywords": [
+    "turborepo",
+    "expressjs",
+    "svelte",
+    "sveltekit",
+    "typescript"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
