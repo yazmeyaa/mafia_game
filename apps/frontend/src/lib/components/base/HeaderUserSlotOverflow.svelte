@@ -1,12 +1,9 @@
 <script lang="ts">
-	import { PUBLIC_POCKETBASE_URL } from '$env/static/public';
 	export let open = false;
 	import { user } from '$lib/stores/user';
 	import { onDestroy, onMount } from 'svelte';
 
 	let dropdownContentRef: HTMLDivElement;
-
-	const avatarUrl = `${PUBLIC_POCKETBASE_URL}/api/files/users/${$user?.id}/${$user?.avatar}`;
 
 	function toggleHiddenMode(event: MouseEvent) {
 		event.preventDefault();
@@ -31,14 +28,8 @@
 
 <div hidden={!open} class="dropdown">
 	<button on:click={toggleHiddenMode} class="dropdown-button">
-		{#if $user && $user.avatar}
-			<img src={avatarUrl} alt="avatar" class="avatar" />
-		{:else}
-			<div class="avatar" />
-		{/if}
 	</button>
 	<div bind:this={dropdownContentRef} class="dropdown-content">
-		<img class="dropdown-content-avatar" src={avatarUrl} alt="avatar" />
 		<strong class="dropdown-content-username">{$user?.username}</strong>
 		<ul>
 			<li>
@@ -142,7 +133,7 @@
 					&:visited {
 						color: inherit;
 					}
-					&>span{
+					& > span {
 						font-size: 1.25rem;
 					}
 				}

@@ -12,7 +12,7 @@ export class Authentication {
         this.service = service
     }
 
-    async authWithPassword(username: string, password: string): Promise<User | null> {
+    async authWithPassword(username: string, password: string): Promise<User & { token: string } | null> {
         const url = this.service.baseUrl + routes.auth.users.login
         const bodyPayload = { username, password }
         const body = JSON.stringify(bodyPayload)
@@ -25,7 +25,8 @@ export class Authentication {
                 body
             })
 
-            const data = await response.json() as User
+            const data = await response.json() as User & { token: string }
+            if (response.status >= 400) throw new Error("Failed to auth!")
             return data
         }
         catch (err) {
@@ -86,10 +87,21 @@ export class Authentication {
                 credentials: "include",
             })
 
-            return await response.json()
+            const data = await response.json() as { user: User, token: string, message: string }
+
+            if (response.status >= 400) {
+                throw new Error("Failed to refresh auth")
+            }
+
+            return data
+
         }
-        catch (err) {
-            console.log(err)
+        catch (error) {
+            if (error instanceof Error) {
+                console.log(error.message)
+            } else {
+                console.log(error)
+            }
             return null
         }
     }

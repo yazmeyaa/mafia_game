@@ -1,5 +1,5 @@
 import { service } from '$lib/service/backendService'
-// import type { Record } from 'pocketbase'
+import { serialize } from 'cookie'
 
 export async function handle({ event, resolve }) {
     const lang = event.cookies.get('lang') ?? 'ru'
@@ -8,11 +8,15 @@ export async function handle({ event, resolve }) {
     const auth_token = event.cookies.get('auth') ?? ''
     event.locals.service = service
 
+    let tokenToSet: null | string = null
+
+
     try {
-            const data = await event.locals.service.authentication.refreshAuth(auth_token)
-            console.log("::DATA: ", data)
-            // @ts-ignore
-            // event.locals.user = structuredClone(data)
+        const data = await event.locals.service.authentication.refreshAuth(auth_token)
+        console.log("::DATA: ", data)
+        if (!data) throw new Error('Failed to auth');
+        event.locals.user = data.user
+        tokenToSet = data.token
     }
     catch (error) {
         console.log("::ERROR: ", error)
@@ -20,7 +24,6 @@ export async function handle({ event, resolve }) {
     }
 
     const response = await resolve(event);
-
-    // response.headers.set('set-cookie', event.locals.pb.authStore.exportToCookie({ secure: false }));
+    if (tokenToSet) response.headers.set('set-cookie', serialize('auth', tokenToSet))
     return response;
 }

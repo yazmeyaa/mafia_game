@@ -1,10 +1,7 @@
 <script lang="ts">
-	import { PUBLIC_POCKETBASE_URL } from '$env/static/public';
 	import { user } from '$lib/stores/user';
 	import { AppShell, AppBar, Avatar } from '@skeletonlabs/skeleton';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
-
-	const avatarUrl = `${PUBLIC_POCKETBASE_URL}/api/files/users/${$user?.id}/${$user?.avatar}?thumb=64x64`;
 </script>
 
 <AppShell>
@@ -21,7 +18,7 @@
 					<LightSwitch />
 					<div class="dropdown relative">
 						<a href="/profile" class="btn-icon variant-filled-primary"
-							><Avatar class="select-none" src={avatarUrl} />
+							><Avatar class="select-none" />
 						</a>
 					</div>
 				</div>
