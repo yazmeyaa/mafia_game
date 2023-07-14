@@ -6,7 +6,7 @@ import { JsonWebTokenError, verify } from 'jsonwebtoken'
 
 
 async function refreshAuth(req: Request<any, any>, res: Response) {
-    const { auth } = req.cookies
+    const { auth } = req.headers
     if (!auth || typeof auth !== 'string') {
         return res.status(400).send({
             error: "Missed auth cookie!"
@@ -16,6 +16,10 @@ async function refreshAuth(req: Request<any, any>, res: Response) {
         const { username } = verify(auth, appConfig.jwtSecret) as { username: string }
 
         const user = await Users.findOne({ where: { username } })
+
+        if (!user) return res.status(400).json({
+            error: "Something went wrong"
+        })
 
         const token = createToken(username)
 

@@ -1,7 +1,8 @@
 import type { Request, Response } from "express";
 import { compare } from 'bcrypt'
-import { UserInstance, Users } from "@app/models/user";
+import { Users } from "@app/models/user";
 import { createToken } from "@app/utils/jwt";
+import { UserInstance } from "types";
 
 interface RequestBody {
     username: string,
