@@ -30,24 +30,24 @@
         <div>
             <h4>apps/backend</h4>
             <pre>
-EXPRESS_PORT=NUMBER (REQUIRED)
+<span>EXPRESS_PORT= (REQUIRED)</span>
 <br>
-MYSQL_PORT=NUMBER (REQUIRED)
-MYSQL_URL=string (REQUIRED)
-MYSQL_USER=string (REQUIRED)
-MYSQL_PASSWORD=string (REQUIRED)
-MYSQL_DATABASE=string (REQUIRED)
+<span>MYSQL_PORT= (default 3306)</span>
+<span>MYSQL_URL= (default localhost)</span>
+<span>MYSQL_USER= (default root)</span>
+<span>MYSQL_PASSWORD= (default !empty string!)</span>
+<span>MYSQL_DATABASE= (default defaultDatabase)</span>
 <br>
-REDIS_HOST=string (REQUIRED)
-REDIS_PORT=number (REQUIRED)
-REDIS_PASSWORD=string (REQUIRED)
-REDIS_DATABASE=number (REQUIRED 0-15)
+<span>REDIS_HOST= (default 127.0.0.1)</span>
+<span>REDIS_PORT= (default 6379)</span>
+<span>REDIS_PASSWORD= (default !empty string!)</span>
+<span>REDIS_DATABASE= (default 0)</span>
             </pre>
         </div>
         <div>
             <h4>apps/frontend</h4>
             <pre>
-PUBLIC_POCKETBASE_URL=string (REQUIRED)
+<span>PUBLIC_POCKETBASE_URL=string (REQUIRED)</span>
             </pre>
         </div>
     </div>

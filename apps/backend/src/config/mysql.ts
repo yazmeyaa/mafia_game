@@ -1,6 +1,14 @@
 /** Important keys to use MySQL database */
 const requiredKeys = ['port', 'url', 'user', 'password', 'database'] as const
 
+const defaultValues = {
+    port: '3306',
+    url: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'defaultDatabase'
+} as const
+
 type RequiredFieldsType = typeof requiredKeys[number]
 
 export type MySQLConfigType = Record<RequiredFieldsType, string>
@@ -17,8 +25,7 @@ function getMySQLConfig(): MySQLConfigType {
     requiredKeys.forEach(key => {
         const envKey = `MYSQL_${key.toUpperCase()}`
         const value = process.env[envKey]
-        if (!value) throw new Error(`Missed environment variable: ${envKey}`)
-        obj[key] = value
+        obj[key] = value ?? defaultValues[key]
     })
 
     return obj

@@ -1,6 +1,13 @@
 /** Important keys to use Redis */
 const requiredKeys = ['host', 'port', 'password', 'database'] as const
 
+const defaultValues: Record<typeof requiredKeys[number], string> = {
+    database: '0',
+    host: '127.0.0.1',
+    password: '',
+    port: '6379'
+} as const
+
 type RequiredFieldsType = typeof requiredKeys[number]
 
 export type RedisConfigType = Record<RequiredFieldsType, string>
@@ -17,8 +24,7 @@ function getRedisConfig(): RedisConfigType {
     requiredKeys.forEach(key => {
         const envKey = `REDIS_${key.toUpperCase()}`
         const value = process.env[envKey]
-        if (!value) throw new Error(`Missed environment variable: ${envKey}`)
-        obj[key] = value
+        obj[key] = value ?? defaultValues[key]
     })
 
     return obj
