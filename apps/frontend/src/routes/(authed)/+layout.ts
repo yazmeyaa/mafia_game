@@ -5,7 +5,7 @@ export const load = async ({ parent, url }) => {
     const params = new URLSearchParams({
         redirectTo: url.pathname
     })
-    if(!user) throw redirect(302, `/login?${params.toString()}`)
+    if (!user) throw redirect(302, `/login?${params.toString()}`)
 
     return {}
 }

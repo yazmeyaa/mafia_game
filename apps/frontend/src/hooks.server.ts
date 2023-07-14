@@ -13,7 +13,6 @@ export async function handle({ event, resolve }) {
 
     try {
         const data = await event.locals.service.authentication.refreshAuth(auth_token)
-        console.log("::DATA: ", data)
         if (!data) throw new Error('Failed to auth');
         event.locals.user = data.user
         tokenToSet = data.token

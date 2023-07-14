@@ -7,20 +7,16 @@ export const actions: Actions = {
         const username = data.get('username')
         const password = data.get('password')
 
-        const { pb } = locals
+        const { service } = locals
 
         if (!username || !password) return fail(400, { error: "Missed required values!" })
 
         try {
-            await pb.collection('users').create({
-                username,
-                password,
-                passwordConfirm: password
-            })
-            await pb.collection('users').authWithPassword(username.toString(), password.toString())
-            const pb_cookie = pb.authStore.exportToCookie()
-            cookies.set('pb_auth', pb_cookie)
-            return {message: 'OK'}
+            await service.authentication.registerWithPassword(username.toString(), password.toString())
+            const data = await service.authentication.authWithPassword(username.toString(), password.toString())
+            if (!data) throw new Error("Failed to register")
+            cookies.set('auth', data.token)
+            return { message: 'OK' }
         }
         catch (err) {
             console.log(err)
