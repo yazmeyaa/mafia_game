@@ -1,4 +1,4 @@
-<h1>Mafia app</h1>
+<h1>Mafia fullstack application</h1>
 
 <section>
     <h2>Prerequirements</h2>
