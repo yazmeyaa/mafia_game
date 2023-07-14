@@ -18,7 +18,9 @@ export async function handle({ event, resolve }) {
         tokenToSet = data.token
     }
     catch (error) {
-        console.log("::ERROR: ", error)
+        if (error instanceof Error) {
+            console.log("::ERROR HOOKS SERVER TS: ", error.message)
+        } else console.log("::ERROR HOOKS SERVER TS: ", error)
         event.locals.user = undefined
     }
 
