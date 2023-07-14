@@ -41,7 +41,7 @@ async function startServer() {
 startServer()
 
 const corsOptions = {
-    origin: ['http://localhost:3001', 'http://localhost:3000'],
+    origin: ['http://localhost:3001', 'http://localhost:3000', 'http://localhost:5173'],
     credentials: true
 }
 
@@ -51,7 +51,7 @@ app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-app.use('/auth/', authRouter)
+app.use('/auth', authRouter)
 
 wss.on('connection', async (ws: WebSocket, req: http.IncomingMessage) => {
 

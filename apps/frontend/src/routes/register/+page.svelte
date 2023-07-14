@@ -24,7 +24,7 @@
 				<label for="password">{$t('register.password')}</label>
 				<input type="password" name="password" id="password" />
 			</div>
-			<button type="submit">{$t('register.register')}</button>
+			<button type="submit">Register</button>
 			<small>{$t('register.already_has_account')} <a href="/login">{$t('register.login')}</a></small>
 		</form>
 	</div>

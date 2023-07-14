@@ -11,7 +11,7 @@
 <main>
 	<div class="card w-fit mx-auto p-16 mt-4">
 		<header class="flex flex-col card-header items-center gap-4 ">
-			<Avatar src={avatarUrl} width="w-64" />
+			<Avatar src={avatarUrl} width="w-64" initials={$user.username.slice(0, 2)} />
 			<h1 class="h2">{$user?.username}</h1>
 		</header>
         <section>

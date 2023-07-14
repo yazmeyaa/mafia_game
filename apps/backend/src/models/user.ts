@@ -1,5 +1,6 @@
 import { sequelize } from '@modules/sequelize'
 import { DataTypes, Model } from 'sequelize'
+import { UserStats } from './stats';
 
 interface UserAttributes {
     username: string;
@@ -10,7 +11,7 @@ interface UserAttributes {
 
 export interface UserInstance extends Model<UserAttributes, UserAttributes>, UserAttributes { }
 
-export const Users = sequelize.define<UserInstance>('Users', {
+const Users = sequelize.define<UserInstance>('Users', {
     username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -28,3 +29,7 @@ export const Users = sequelize.define<UserInstance>('Users', {
         unique: true,
     },
 })
+
+Users.hasOne(UserStats)
+
+export { Users }

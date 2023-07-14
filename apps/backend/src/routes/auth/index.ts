@@ -1,10 +1,8 @@
 import { Router } from "express";
-import { login } from "./login";
-import { register } from "./register";
+import { authUsersRouter } from "./users";
 
 const router = Router()
 
-router.route('/login').post(login)
-router.route('/register').post(register)
+router.use('/users', authUsersRouter)
 
 export { router as authRouter }

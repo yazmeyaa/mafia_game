@@ -1,7 +1,6 @@
 import { appConfig } from "@app/config";
 import { Sequelize } from "sequelize";
 
-
 export const sequelize = new Sequelize({
     dialect: 'mysql',
     host: appConfig.mysql.url,
