@@ -3,6 +3,7 @@ import { Users } from "@app/models/user";
 import { createToken } from "@app/utils/jwt";
 import type { Request, Response } from "express";
 import { JsonWebTokenError, verify } from 'jsonwebtoken'
+import { User } from "types";
 
 
 async function refreshAuth(req: Request<any, any>, res: Response) {
@@ -15,7 +16,7 @@ async function refreshAuth(req: Request<any, any>, res: Response) {
     try {
         const { username } = verify(auth, appConfig.jwtSecret) as { username: string }
 
-        const user = await Users.findOne({ where: { username } })
+        const user = await Users.findOne({ where: { username } }) as Partial<User>
 
         if (!user) return res.status(400).json({
             error: "Something went wrong"
@@ -23,9 +24,11 @@ async function refreshAuth(req: Request<any, any>, res: Response) {
 
         const token = createToken(username)
 
+        user.password = undefined
+
         res.cookie('auth', token)
         if (auth) return res.status(200).send({
-            user,
+            user: user as Partial<User>,
             token
         })
 
