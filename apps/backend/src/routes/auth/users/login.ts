@@ -35,7 +35,7 @@ async function login(req: Request<any, any, RequestBody>, res: Response) {
     const responsePayload = {
         user: user as Partial<UserInstance>,
         token,
-        message: "Successfull authenticated",
+        message: "Successfull authenticated"
     }
 
     responsePayload.user.password = undefined

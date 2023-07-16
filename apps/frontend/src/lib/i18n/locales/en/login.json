@@ -1,8 +1,8 @@
 {
-    "username": "Username",
-    "password": "Password",
-    "remember_me": "Remember me",
-    "login": "Login",
-    "dont_have_account": "Don't have an account yet? ",
-    "register": "Register!"
+	"username": "Username",
+	"password": "Password",
+	"remember_me": "Remember me",
+	"login": "Login",
+	"dont_have_account": "Don't have an account yet? ",
+	"register": "Register!"
 }

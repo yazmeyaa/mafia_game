@@ -1,3 +1,20 @@
+<style lang="scss">
+	.logo {
+		display: flex;
+		justify-content: center;
+	}
+
+	.h2 {
+		text-align: center;
+	}
+
+	.form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+</style>
+
 <script lang="ts">
 	import { t } from '$lib/i18n';
 	import { enhance } from '$app/forms';
@@ -46,20 +63,3 @@
 		<a class="anchor" href="/login">Login!</a></small
 	>
 </form>
-
-<style lang="scss">
-	.logo {
-		display: flex;
-		justify-content: center;
-	}
-
-	.h2 {
-		text-align: center;
-	}
-
-	.form {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-</style>

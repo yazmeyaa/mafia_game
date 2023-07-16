@@ -1,5 +1,5 @@
-import { getUser, user } from "$lib/stores/user";
+import { getUser, user } from '$lib/stores/user';
 
 user.subscribe(() => {
-    console.log(getUser())
-})
+	console.log(getUser());
+});

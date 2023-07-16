@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { user } from '$lib/stores/user';
 	import { AppShell, AppBar, Avatar } from '@skeletonlabs/skeleton';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 </script>

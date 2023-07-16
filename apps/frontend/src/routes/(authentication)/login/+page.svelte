@@ -1,3 +1,19 @@
+<style lang="scss">
+	.logo {
+		display: flex;
+		justify-content: center;
+	}
+	.h2 {
+		text-align: center;
+	}
+
+	.form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+</style>
+
 <script lang="ts">
 	import { t } from '$lib/i18n';
 	import { enhance, applyAction } from '$app/forms';
@@ -53,19 +69,3 @@
 	<button class="btn variant-filled" disabled={loading} type="submit">{$t('login.login')}</button>
 	<small>{$t('login.dont_have_account')} <a class="anchor" href="/register">Register</a></small>
 </form>
-
-<style lang="scss">
-	.logo {
-		display: flex;
-		justify-content: center;
-	}
-	.h2 {
-		text-align: center;
-	}
-
-	.form {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-</style>

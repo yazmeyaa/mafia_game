@@ -1,9 +1,3 @@
-<section class="login_page_container">
-	<div class="form_container">
-		<slot />
-	</div>
-</section>
-
 <style lang="scss">
 	.login_page_container {
 		display: flex;
@@ -24,10 +18,11 @@
 
 		flex-shrink: 1;
 		flex-grow: 1;
-
-
-		& > .h2 {
-			text-align: center;
-		}
 	}
 </style>
+
+<section class="login_page_container">
+	<div class="form_container">
+		<slot />
+	</div>
+</section>

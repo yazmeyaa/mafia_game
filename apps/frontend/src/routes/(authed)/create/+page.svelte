@@ -1,6 +1,5 @@
 <script lang="ts">
 	let maxPlayer = 6;
-
 </script>
 
 <svlete:head>

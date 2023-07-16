@@ -1,9 +1,8 @@
 {
-    "i18n-ally.localesPaths": [
-        "src/lib/i18n",
-        "src/lib/i18n/locales",
-        "src/lib/i18n/locales/en",
-        "src/lib/i18n/locales/ru"
-    ],
-
+	"i18n-ally.localesPaths": [
+		"src/lib/i18n",
+		"src/lib/i18n/locales",
+		"src/lib/i18n/locales/en",
+		"src/lib/i18n/locales/ru"
+	]
 }

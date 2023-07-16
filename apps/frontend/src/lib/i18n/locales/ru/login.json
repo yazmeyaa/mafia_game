@@ -1,8 +1,8 @@
 {
-    "username": "Имя пользователя",
-    "password": "Пароль",
-    "remember_me": "Запомнить меня",
-    "login": "Войти",
-    "dont_have_account": "Ещё нет аккаунта? ",
-    "register": "Зарегистрируйтесь!"
+	"username": "Имя пользователя",
+	"password": "Пароль",
+	"remember_me": "Запомнить меня",
+	"login": "Войти",
+	"dont_have_account": "Ещё нет аккаунта? ",
+	"register": "Зарегистрируйтесь!"
 }
