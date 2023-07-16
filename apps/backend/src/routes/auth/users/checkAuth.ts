@@ -1,9 +1,11 @@
 import { appConfig } from "@app/config";
 import type { Request, Response } from "express";
 import { JsonWebTokenError, verify } from 'jsonwebtoken'
+import { UsersCheckAuthErrorResponse, UsersCheckAuthSuccessResponse } from 'types'
 
+type ResponseBodyType = UsersCheckAuthErrorResponse | UsersCheckAuthSuccessResponse
 
-async function checkAuth(req: Request<any, any>, res: Response) {
+async function checkAuth(req: Request, res: Response<ResponseBodyType>) {
     const { auth } = req.cookies
     if (!auth || typeof auth !== 'string') {
         return res.status(400).send({
@@ -12,9 +14,10 @@ async function checkAuth(req: Request<any, any>, res: Response) {
     }
     try {
         verify(auth, appConfig.jwtSecret)
+        return res.status(200).json({
+            message: 'OK'
+        })
 
-        if (auth) return res.status(200).send()
-        else return res.status(401).send()
     }
     catch (error) {
         if (error instanceof JsonWebTokenError) {

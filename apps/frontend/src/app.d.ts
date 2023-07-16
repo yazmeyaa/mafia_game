@@ -1,7 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
 
 import type { BackendService } from "backend_service";
-import type { User } from 'types'
+import type { UserWithoutSecretFields } from "types";
 
 // for information about these interfaces
 declare global {
@@ -9,7 +9,7 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			lang: string
-			user: User | null | undefined
+			user: UserWithoutSecretFields | null | undefined
 			service: BackendService
 		}
 		// interface PageData {}

@@ -29,7 +29,8 @@ async function refreshAuth(req: Request<any, any>, res: Response) {
         res.cookie('auth', token)
         if (auth) return res.status(200).send({
             user: user as Partial<User>,
-            token
+            token,
+            message: "Success"
         })
 
         else return res.status(401).send()

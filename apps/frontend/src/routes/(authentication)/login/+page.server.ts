@@ -16,12 +16,18 @@ export const actions: Actions = {
 
         try {
             const data = await service.authentication.authWithPassword(username.toString(), password.toString())
-            if (!data) throw new Error('Failed to auth')
+
+            if ('error' in data) {
+                throw new Error('Failed to auth. Cause: ' + data.error)
+            }
+
             cookies.set('auth', data.token)
             success = true
         }
         catch (error) {
-            console.log("::ERROR", error)
+            return fail(400, {
+                error: 'failed to auth'
+            })
         }
 
         if (success) {

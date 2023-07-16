@@ -14,7 +14,7 @@ export const actions: Actions = {
         try {
             await service.authentication.registerWithPassword(username.toString(), password.toString())
             const data = await service.authentication.authWithPassword(username.toString(), password.toString())
-            if (!data) throw new Error("Failed to register")
+            if ('error' in data) throw new Error("Failed to register")
             cookies.set('auth', data.token)
             return { message: 'OK' }
         }

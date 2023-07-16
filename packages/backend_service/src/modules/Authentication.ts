@@ -1,6 +1,13 @@
 import { BackendService } from "index";
 import { routes } from "../routes";
-import { User } from 'types'
+import type {
+    UsersLoginErrorResponse,
+    UsersLoginSuccessResponse,
+    UsersRefreshAuthErrorResponse,
+    UsersRefreshAuthSuccessResponse,
+    UsersRegisterErrorResponse,
+    UsersRegisterSuccessResponse
+} from 'types'
 
 export class Authentication {
     service: BackendService
@@ -12,7 +19,7 @@ export class Authentication {
         this.service = service
     }
 
-    async authWithPassword(username: string, password: string): Promise<User & { token: string } | null> {
+    async authWithPassword(username: string, password: string): Promise<UsersLoginSuccessResponse | UsersLoginErrorResponse> {
         const url = this.service.baseUrl + routes.auth.users.login
         const bodyPayload = { username, password }
         const body = JSON.stringify(bodyPayload)
@@ -25,18 +32,23 @@ export class Authentication {
                 body
             })
 
-            const data = await response.json() as User & { token: string }
-            if (response.status >= 400) throw new Error("Failed to auth!")
+            if (response.status >= 400) {
+                const errorData = await response.json() as UsersLoginErrorResponse
+                return errorData
+            }
+            const data = await response.json() as UsersLoginSuccessResponse
+
             return data
         }
         catch (err) {
-            console.log(err)
-            return null
+            return {
+                error: "Failed to auth"
+            }
         }
 
     }
 
-    async registerWithPassword(username: string, password: string): Promise<{ message: string } | null> {
+    async registerWithPassword(username: string, password: string): Promise<UsersRegisterSuccessResponse | UsersRegisterErrorResponse> {
         const url = this.service.baseUrl + routes.auth.users.regsiter
         const bodyPayload = { username, password }
         const body = JSON.stringify(bodyPayload)
@@ -49,12 +61,13 @@ export class Authentication {
                 body
             })
 
-            const data = await response.json()
+            const data = await response.json() as UsersRegisterSuccessResponse | UsersRegisterErrorResponse
             return data
         }
         catch (err) {
-            console.log(err)
-            return null
+            return {
+                error: "Failed to auth."
+            }
         }
     }
 
@@ -75,7 +88,7 @@ export class Authentication {
         }
     }
 
-    async refreshAuth(token: string): Promise<{ user: User, token: string, message: string } | null> {
+    async refreshAuth(token: string): Promise<UsersRefreshAuthSuccessResponse | UsersRefreshAuthErrorResponse> {
         const url = this.service.baseUrl + routes.auth.users.refreshAuth
         const headers = this.baseHeaders
         headers.set('auth', token)
@@ -87,9 +100,9 @@ export class Authentication {
                 credentials: "include",
             })
 
-            const data = await response.json() as { user: User, token: string, message: string }
+            const data = await response.json() as UsersRefreshAuthSuccessResponse
 
-            if (response.status >= 400) {
+            if (response.status >= 400 || 'error' in data) {
                 throw new Error("Failed to refresh auth")
             }
 
@@ -102,7 +115,9 @@ export class Authentication {
             } else {
                 console.log(error)
             }
-            return null
+            return {
+                error: "Failed to refresh auth"
+            }
         }
     }
 
