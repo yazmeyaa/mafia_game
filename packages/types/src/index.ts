@@ -12,3 +12,6 @@ export type {
     UsersRegisterErrorResponse,
     UsersRegisterSuccessResponse
 } from './backend_api'
+export type {
+    RoomType
+} from 'src/lobby'
