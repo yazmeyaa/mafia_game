@@ -10,6 +10,7 @@ import { redis } from './modules/redis'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import { authRouter } from './routes/auth'
+import { lobbyList } from './helpers/lobbyList'
 
 const socketPathes = {
     lobby: '/lobby',
@@ -26,6 +27,9 @@ async function startServer() {
 
     await redis.connect()
     console.log(chalk.blue('Successfully connected to Redis.'))
+    await redis.set('lobby_list', '[]')
+
+    lobbyList.getList().then(console.log)
 
     await sequelize.authenticate()
     console.log(chalk.blue('Connected to MySQL Database.'))
@@ -62,24 +66,11 @@ wss.on('connection', async (ws: WebSocket, req: http.IncomingMessage) => {
         case '/lobby': {
             ws.send('Wellcome to /lobby socket!')
 
-            const subscriber = redis.duplicate()
-            await subscriber.connect()
-            subscriber.SUBSCRIBE('lobby', (message, channel) => {
-                ws.send('Recieved new message: ' + message)
-            })
-
-
-            const publisher = redis.duplicate()
-            await redis.connect()
-            publisher.PUBLISH('lobby', 'Hello from publisher')
-
-
             ws.on('message', async (msg, isBinary) => {
                 wsLobbyHandler({ msg, isBinary }, ws)
             })
 
             ws.on('close', () => {
-                subscriber.disconnect()
                 ws.close()
             })
             break;

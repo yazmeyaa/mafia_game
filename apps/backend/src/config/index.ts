@@ -32,5 +32,3 @@ export const appConfig: AppConfig = { //* Here can be used default settings
 } as AppConfig
 
 loadServerVariables()
-
-console.log('::CONFIG: ', appConfig)

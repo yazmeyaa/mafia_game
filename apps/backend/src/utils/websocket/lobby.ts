@@ -25,10 +25,8 @@ export class Lobby implements RoomType {
         this.players = init.players
     }
 
-    static restoreFromString(stringifiedObject: string): Lobby | null {
-        try {
-            const obj = JSON.parse(stringifiedObject) as Record<string, any>
-            const objKeys = Object.keys(obj)
+    static checkIsObjLobbyType(obj: Record<string, any>): boolean {
+        const objKeys = Object.keys(obj)
             let isKeysEqual = true
             for (const key of objKeys) {
                 if (ROOM_FIELDS.includes(key as keyof RoomType) === false) {
@@ -36,7 +34,14 @@ export class Lobby implements RoomType {
                     break;
                 }
             }
-            if (!isKeysEqual) return null
+        return isKeysEqual
+    }
+
+    static restoreFromString(stringifiedObject: string): Lobby | null {
+        try {
+            const obj = JSON.parse(stringifiedObject) as Record<string, any>
+            const isValidObject = this.checkIsObjLobbyType(obj)
+            if (!isValidObject) return null
             //* If object has all fields from ROOM_FIELDS
             return obj as Lobby
         }
