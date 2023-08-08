@@ -1,4 +1,6 @@
+import { MainLayout } from '@/widgets/layouts/main/components/main-layout/main-layout'
 import './globals.css'
+
 export default function RootLayout({
   children,
 }: {
@@ -6,7 +8,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body >{children}</body>
+      <body >
+        <MainLayout>
+          {children}
+        </MainLayout>
+      </body>
     </html>
   )
 }
