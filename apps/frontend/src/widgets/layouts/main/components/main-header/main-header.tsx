@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { HeaderNavLink } from "./components"
+import { UserCircle } from "@/shared/components/user-circle/user-circle"
 
 export const MainHeader = () => {
     return (
@@ -9,16 +10,17 @@ export const MainHeader = () => {
                     <strong className=" text-lg">Mafia</strong>
                 </Link>
             </div>
-                <nav className="flex h-full items-center">
-                    <ul className="flex items-center h-full gap-1">
-                        <HeaderNavLink to="/">
-                            Home
-                        </HeaderNavLink>
-                        <HeaderNavLink to="/about">
-                            About
-                        </HeaderNavLink>
-                    </ul>
-                </nav>
+            <nav className="flex h-full items-center grow">
+                <ul className="flex items-center h-full gap-1">
+                    <HeaderNavLink to="/">
+                        Home
+                    </HeaderNavLink>
+                    <HeaderNavLink to="/about">
+                        About
+                    </HeaderNavLink>
+                </ul>
+            </nav>
+            <UserCircle />
         </header>
     )
 }

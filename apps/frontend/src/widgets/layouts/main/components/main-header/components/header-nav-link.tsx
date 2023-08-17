@@ -12,4 +12,5 @@ export const HeaderNavLink: FC<HeaderNavLink> = ({children, to}) => {
             <Link className="h-full flex items-center justify-center hover:bg-red-500 px-4 transition-all" href={to}>{children}</Link>
         </li>
     )
+
 }
