@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { HeaderNavLink } from "./components"
-import { UserCircle } from "@/shared/components/user-circle/user-circle"
+import { UserCircle } from "@/widgets/user/user-circle/user-circle"
 
 export const MainHeader = () => {
     return (
