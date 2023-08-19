@@ -4,14 +4,14 @@ import { UserCircle } from "@/widgets/user/user-circle/user-circle"
 
 export const MainHeader = () => {
     return (
-        <header className=" flex items-center px-8 h-12 gap-8 bg-red-900 text-stone-200">
+        <header className="app_header">
             <div>
                 <Link href='/'>
-                    <strong className=" text-lg">Mafia</strong>
+                    <strong >Mafia</strong>
                 </Link>
             </div>
-            <nav className="flex h-full items-center grow">
-                <ul className="flex items-center h-full gap-1">
+            <nav >
+                <ul >
                     <HeaderNavLink to="/">
                         Home
                     </HeaderNavLink>
